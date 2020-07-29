@@ -19,6 +19,7 @@ public class DatabaseConfiguration {
         throw new RuntimeException(" Failed to read config file");
       }
       try {
+        Class.forName("com.mysql.cj.jdbc.Driver");
         Properties properties = new Properties();
         properties.load(inputStream);
 
@@ -26,7 +27,7 @@ public class DatabaseConfiguration {
                 properties.getProperty("datasource.url"),
                 properties.getProperty(" datasource.username"),
                 properties.getProperty("datasource.password"));
-      } catch (IOException | SQLException e) {
+      } catch (IOException | SQLException | ClassNotFoundException e) {
         throw new RuntimeException(e.getMessage());
       } finally {
         try {
