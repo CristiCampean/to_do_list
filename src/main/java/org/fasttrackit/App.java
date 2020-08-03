@@ -18,6 +18,8 @@ public class App
 
         request.setDescription("Learn JDBS");
         request.setDeadline(LocalDate.now().plusWeeks(1));
-        taskRepository.createTask(request);
+       taskRepository.createTask(request);
+       taskRepository.deleteTask(1);
+        System.out.println(taskRepository.getTasks());
     }
 }

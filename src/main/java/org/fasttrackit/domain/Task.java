@@ -1,11 +1,11 @@
 package org.fasttrackit.domain;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 public class Task {
     private long id;
     private String description;
-    private LocalDate  deadline;
+    private Date deadline;
     private boolean done;
 
     public long getId() {
@@ -22,11 +22,11 @@ public class Task {
         this.description = description;
     }
 
-    public LocalDate getDeadline() {
+    public Date getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(LocalDate deadline) {
+    public void setDeadline(Date deadline) {
         this.deadline = deadline;
 
     }
