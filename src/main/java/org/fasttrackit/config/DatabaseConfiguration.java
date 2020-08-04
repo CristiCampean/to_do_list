@@ -25,7 +25,7 @@ public class DatabaseConfiguration {
 
         connection = DriverManager.getConnection(
                 properties.getProperty("datasource.url"),
-                properties.getProperty(" datasource.username"),
+                properties.getProperty("datasource.username"),
                 properties.getProperty("datasource.password"));
       } catch (IOException | SQLException | ClassNotFoundException e) {
         throw new RuntimeException(e.getMessage());
