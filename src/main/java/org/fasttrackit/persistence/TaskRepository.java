@@ -1,10 +1,8 @@
-package org.fasttrackit;
-
+package org.fasttrackit.persistence;
 import org.fasttrackit.config.DatabaseConfiguration;
 import org.fasttrackit.domain.Task;
 import org.fasttrackit.transfer.CreateTaskRequest;
 import org.fasttrackit.transfer.UpdateTaskRequest;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,25 +37,27 @@ public class TaskRepository {
             preparedStatement.setLong(2, id);
             preparedStatement.executeUpdate();
         }
-    }public List<Task>getTasks() throws SQLException {
-        String sql = "SELECT id, description deadline, done * FROM task";
+    }
+
+    public List<Task> getTasks() throws SQLException {
+        String sql = "SELECT id, description deadline, done  FROM task";
         List<Task> tasks = new ArrayList<>();
 
-        try(Statement statement = DatabaseConfiguration.getConnection().createStatement()){
+        try (Statement statement = DatabaseConfiguration.getConnection().createStatement()) {
             ResultSet resultSet = statement.executeQuery(sql);
-             while (resultSet.next()){
-                 Task task = new Task();
-                 task.setId(resultSet.getLong("id"));
-                 task.setDescription(resultSet.getString("description"));
-                 task.setDeadline(resultSet.getDate("deadline"));
-                 task.setDone(resultSet.getBoolean("done"));
-                 tasks.add(task);
+            while (resultSet.next()) {
+                Task task = new Task();
+                task.setId(resultSet.getLong("id"));
+                task.setDescription(resultSet.getString("description"));
+                task.setDeadline(resultSet.getDate("deadline"));
+                task.setDone(resultSet.getBoolean("done"));
+                tasks.add(task);
 
-             }
+            }
         }
 
 
-    return tasks;
+        return tasks;
     }
 
 }

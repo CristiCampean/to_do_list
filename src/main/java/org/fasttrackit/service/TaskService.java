@@ -1,7 +1,7 @@
 package org.fasttrackit.service;
 
 
-import org.fasttrackit.TaskRepository;
+import org.fasttrackit.persistence.TaskRepository;
 import org.fasttrackit.domain.Task;
 import org.fasttrackit.transfer.CreateTaskRequest;
 import org.fasttrackit.transfer.UpdateTaskRequest;
@@ -24,7 +24,7 @@ public class TaskService {
         System.out.println("Updateing "+ id + request);
         taskRepository.updateTask(id,request);
     }
-    public void deliteTask( long id) throws SQLException {
+    public void deleteTask( long id) throws SQLException {
         System.out.println("Deleting task"+ id);
         taskRepository.deleteTask(id);
     }

@@ -1,5 +1,6 @@
 package org.fasttrackit;
 
+import org.fasttrackit.persistence.TaskRepository;
 import org.fasttrackit.transfer.CreateTaskRequest;
 
 import java.sql.SQLException;
