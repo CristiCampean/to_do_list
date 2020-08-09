@@ -11,7 +11,7 @@ public class TaskRepository {
 
     public void createTask(CreateTaskRequest request) throws SQLException {
         String sql = "INSERT INTO task (description, deadline) VALUES( ? ,?)";
-        // try with resorceous
+        // try with resources
         try (
                 PreparedStatement preparedStatement = DatabaseConfiguration.getConnection().prepareStatement(sql)) {
             preparedStatement.setString(1, request.getDescription());
@@ -22,7 +22,7 @@ public class TaskRepository {
     }
 
     public void deleteTask(long id) throws SQLException {
-        String sql = "DELITE FROM task WHERE id =?";
+        String sql = "DELETE FROM task WHERE id =?";
         try (PreparedStatement preparedStatement = DatabaseConfiguration.getConnection().prepareStatement(sql)) {
             preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
@@ -40,7 +40,7 @@ public class TaskRepository {
     }
 
     public List<Task> getTasks() throws SQLException {
-        String sql = "SELECT id, description deadline, done  FROM task";
+        String sql = "SELECT id, description, deadline, done  FROM task";
         List<Task> tasks = new ArrayList<>();
 
         try (Statement statement = DatabaseConfiguration.getConnection().createStatement()) {

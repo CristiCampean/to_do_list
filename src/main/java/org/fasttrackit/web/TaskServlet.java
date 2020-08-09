@@ -36,13 +36,36 @@ public class TaskServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ObjectMapper objectMapper= new ObjectMapper();
+        ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
-        CreateTaskRequest request = objectMapper.readValue(req.getReader(),CreateTaskRequest.class);
+        CreateTaskRequest request = objectMapper.readValue(req.getReader(), CreateTaskRequest.class);
         try {
             taskService.createTask(request);
         } catch (SQLException e) {
-            resp.sendError(500,e.getMessage());
+            resp.sendError(500, e.getMessage());
         }
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String idAsString = req.getParameter("id");
+        UpdateTaskRequest request = ObjectMapperConfiguration.getObjectMapper()
+                .readValue(req.getReader(), UpdateTaskRequest.class);
+        try {
+            taskService.updateTask(Long.parseLong(idAsString), request);
+        } catch (SQLException e) {
+            resp.sendError(500, e.getMessage());
+        }
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String idAsString = req.getParameter("id");
+        try {
+            taskService.deleteTask(Long.parseLong(idAsString));
+        } catch (SQLException e) {
+            resp.sendError(500, e.getMessage());
+        }
+
     }
 }
